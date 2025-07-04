@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>IQ Option Backtest OTC</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding-top: 20px; }
+        input, button, textarea { width: 100%; margin: 5px 0; padding: 8px; }
+        textarea { height: 200px; }
+    </style>
+</head>
+<body>
+    <h2>IQ Option Backtest OTC</h2>
+    <form method="post">
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <input type="text" name="par" placeholder="Par OTC (ex: EURUSD-OTC)" required>
+        <input type="text" name="direcao" placeholder="Direção (CALL ou PUT)" required>
+        <input type="text" name="horario" placeholder="Horário (HH:MM)" required>
+        <input type="number" name="dias" placeholder="Dias de análise" required>
+        <button type="submit">Executar Backtest</button>
+    </form>
+    {% if resultado %}
+        <h3>Resultado:</h3>
+        <textarea readonly>{{ resultado }}</textarea>
+    {% endif %}
+</body>
+</html>
