@@ -1,3 +1,4 @@
 flask
 iqoptionapi
 pytz
+gunicorn
