@@ -6,7 +6,7 @@ import time
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", " "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     resultado = None
     if request.method == "POST":
@@ -21,8 +21,9 @@ def index():
             iq = IQ_Option(email, senha)
             iq.connect()
             iq.change_balance("PRACTICE")
+
             if not iq.check_connect():
-                resultado = "Erro ao conectar."
+                resultado = "Erro ao conectar à conta IQ Option."
             else:
                 timezone = pytz.timezone("America/Sao_Paulo")
                 hoje = datetime.now(timezone).date()
@@ -33,8 +34,8 @@ def index():
                     hora, minuto = map(int, horario.split(":"))
                     dt_local = timezone.localize(datetime(data.year, data.month, data.day, hora, minuto))
                     dt_utc = dt_local.astimezone(pytz.utc)
-
                     timestamp = int(dt_utc.timestamp())
+
                     candles = iq.get_candles(par, 60, 1, timestamp)
                     if candles:
                         candle = candles[0]
@@ -51,6 +52,7 @@ def index():
                         resultados.append(f"{data.isoformat()} - {res}")
                     else:
                         resultados.append(f"{data.isoformat()} - SEM DADOS")
+                    
                     time.sleep(1)
 
                 resultado = "\n".join(resultados)
